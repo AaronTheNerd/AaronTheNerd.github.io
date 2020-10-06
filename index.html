@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- scp ~/Documents/Projects/Webiste/index.html pi@192.168.1.241:/var/www/html -->
+    <head>
+        <title>My Online Portfolio</title>
+        <meta charset="UTF-8">
+    </head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 75px;
+            background-image: url("pattern.jpg");
+            background-repeat: repeat;
+        }
+        h1 {
+            margin: 0px;
+            font-size: 2em;
+        }
+        h2 {
+            margin: 0px;
+            font-size: 1.5em;
+        }
+        h3 {
+            margin: 0px;
+            font-size: 1.17em;
+        }
+        hr {
+            margin: 0px 0px 0px 0px;
+            height: 2px;
+            border-width: 0px;
+            background: black;
+            color: black;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+        }
+        .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .padded {
+            padding: 20px;
+        }
+        .rounded {
+            border-radius: 20px;
+        }
+        .hidden {
+            overflow: hidden;
+            transition: height 500ms none;
+        }
+        .button {
+            background-color: #F0ECE2;
+            border: black;
+            color: black;
+            border-radius: 50%;
+            text-align: center;
+            display: inline-block;
+            font-size: 16pt;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 100;
+        }
+        #contact-column {
+            flex-basis: 25%;
+            border-radius: 40px 0px 0px 40px;
+            background: black;
+            color: #F0ECE2;
+        }
+        #contact {
+            text-align: center;
+            padding: 50px 20px 20px 20px;
+        }
+        #me-pic {
+            border-radius: 50%;
+        }
+        #footer {
+            position: relative;
+            bottom: 0;
+            text-align: center;
+            color: #505050
+        }
+        #resume-column {
+            flex-basis: 75%;
+            border-radius: 0px 40px 40px 0px;
+            background: #F0ECE2;
+            color: black;
+        }
+        #education-section ul {
+            margin: 0px;
+            padding: 0px 0px 0px 40px;
+        }
+        #education-section li {
+            margin: 0px;
+            padding: 0px 0px 0px 0px;
+        }
+        #graduation-span {
+            float: right;
+            text-align: right;
+        }
+        #robot-column {
+            flex-basis: 60%;
+        }
+        #video-column {
+            padding: 10px 0px 0px 0px;
+            flex-basis: 40%;
+        }
+    </style>
+    <body onload="init()">
+        <script>
+            var required_h = 0, optional_h = 0, personal_h = 0;
+            function init() {
+                let required_elem = document.getElementById('required');
+                required_h = required_elem.clientHeight;
+                required_elem.style.height = '0px';
+                let optional_elem = document.getElementById('optional');
+                optional_h = optional_elem.clientHeight;
+                optional_elem.style.height = '0px';
+                let personal_elem = document.getElementById('personal');
+                personal_h = personal_elem.clientHeight;
+                personal_elem.style.height = '0px';
+            }
+            function ToggleContent(id) {
+                var x = document.getElementById(id);
+                if (x.style.height == '' || x.style.height == '0px') {
+                    if (id === 'required') {
+                        x.style.transitionDuration = required_h + 'ms';
+                        x.style.height = required_h + 'px';
+                    } else if (id === 'optional') {
+                        x.style.transitionDuration = optional_h + 'ms';
+                        x.style.height = optional_h + 'px';
+                    } else if (id === 'personal') {
+                        x.style.transitionDuration = personal_h + 'ms';
+                        x.style.height = personal_h + 'px';
+                    }
+                } else {
+                    x.style.height = '0px';
+                }
+            }
+        </script>
+        <div class="row">
+            <div class="column" id="contact-column">
+                <div id="contact">
+                    <img src="me.jpeg" alt="Me" id="me-pic" width="50%">
+                    <h1>Aaron Barge</h1>
+                    email: abarge@email.sc.edu<br><br>
+                    <a href="https://www.github.com/AaronTheNerd">
+                        <img src="github-logo.png" alt="GitHub" width="20%">
+                    </a>
+                </div>
+                <div id="footer">
+                    <p>Copyright 2020</p>
+                </div>
+            </div>
+            <div class="column" id="resume-column">
+                <section class="padded" id="education-section">
+                    <h1>Education</h1>
+                    <hr>
+                    University of South Carolina
+                    <span id="graduation-span">
+                        Expected Graduation: May 2021
+                    </span><br>
+                    <i>Bachelor of Science in Computer Engineering</i><br>
+                    <ul>
+                        <li>GPA: 3.48</li>
+                        <li>Dean's List: 5 semesters</li>
+                    </ul>
+                </section>
+                <section class="padded">
+                    <h1>Coursework</h1>
+                    <hr>
+                    Introduction to Computer Networks<br>
+                    Computer Systems Engineering<br>
+                    Robotic Applications and Design<br>
+                    Data Structures and Algorithms<br>
+                    Operating Systems<br>
+                    Introduction to Computer Architecture<br>
+                    Digital Logic Design<br>
+                    Discrete Structures
+                </section>
+                <section class="padded">
+                    <h1>Projects</h1>
+                    <hr>
+                    <em>Click on each header to learn more.</em>
+                    <section class="padded">
+                        <h2 onclick="ToggleContent('required');">Required Projects</h2>
+                        <hr>
+                        <button class="button padded" width="30px" height="30px">Top</button>
+                        <div class="hidden" id="required">
+                            <section class="padded">
+                                <h3>Simple HTTP Client</h3>
+                                <hr>
+                                Course: Introduction to Computer Networks<br>
+                                Language: Java<br>
+                                Description: Implemented a simple HTTP client and observed the HTTP
+                                protocol in Wireshark. The program had to correctly GET from standard
+                                web servers. Additionally, Wireshark had to "capture" HTTP GET packet,
+                                HTTP response packet, and measure the delay between GET and response
+                                packets. The program also had to correctly handle one-hop HTTP
+                                redirects. Additionally, the output had to be saved in an output file
+                                (shown below).<br>
+                                <img src="network-p1-output.png" alt="Output" class="rounded" width="100%">
+                            </section>
+                            <section class="padded">
+                                <h3>Coin-Row and Robot-Coin Solution</h3>
+                                <hr>
+                                Course: Data Structure and Algorithms<br>
+                                Language: C++<br>
+                                <a href="https://github.com/csce350-spring19/program-5-AaronTheNerd/blob/master/src/program5.h">SRC</a><br>
+                                Description: Implemented dynamic programming solutions for the coin-row
+                                problem and the robot-coin problem. These solutions were able to return
+                                the correct values and other methods were made to backtrack through the
+                                solution to give the specific moves which led to the solution.
+                            </section>
+                            <section class="padded">
+                                <h3>Audio Visualizer</h3>
+                                <hr>
+                                Course: Signals and Systems<br>
+                                Language: MatLab<br>
+                                <a href="https://github.com/AaronTheNerd/Personal-Coding-Projects/tree/master/MatLab/AudioVisualizer">SRC</a><br>
+                                Description: Used a fast Fourier transfer method to create a simple
+                                audio visualizer. In order to make the visualizer more visually
+                                interesting we used a stacked bar graph to add dynamic colors and
+                                "falling bars." In order to use the dynamic colors, the num_of_bars
+                                variable in CLICK_ME.m can be changed to change the number of colors.
+                                The color scaling works by using a pre-defined color map. The falling
+                                bar was achieved by adding a bar the same color as the background and
+                                having a matrix of "differences" which would slowly lower each
+                                iteration. Unfortunately, it is difficult to record this as MatLab's
+                                graphing functions tend to use a lot of processing power. Despite this,
+                                I still embedded a video of the visualizer to show the concept.
+                                <video class="rounded" width="100%" autoplay loop muted>
+                                    <source src="visualizer.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </section>
+                            <section class="padded">
+                                <h3>Simulated SPI Transactions</h3>
+                                <hr>
+                                Course: Computer Systems Engineering<br>
+                                Language: C++<br>
+                                <a href="https://github.com/AaronTheNerd/virtual_spi/blob/master/main.cpp">SRC</a><br>
+                                Description: Coordinated data transfer between a simulated sensor and
+                                flash memory. The implementation utilized a bit-banged SPI transfer
+                                method. This method was able to read, write, and stream bytes between
+                                devices. Additionally, this implementation verified the WHO_AM_I values
+                                of each device. 
+                            </section>
+                            <section class="padded">
+                                <h3>Custom Syscall</h3>
+                                <hr>
+                                Course: Operating Systems<br>
+                                Language: C<br>
+                                Description: Created a custom syscall which would poke different areas
+                                in virtual memory and give information about the properties of that
+                                space in memory. For example, the syscall would give information about
+                                whether or not the memory was occupied and whether the memory is
+                                readable, writable, or executable. The syscall required a recompilation
+                                of the linux kernel.
+                            </section>
+                            <section class="padded">
+                                <h3>Roomba Interface</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="column" id="robot-column">
+                                        Course: Robotic Applications and Design<br>
+                                        Language: Python<br>
+                                        <a href="https://github.com/AaronTheNerd/csce274_project1/blob/master/interface.py">SRC</a>
+                                        Description: Created an interface to control a Roomba. This
+                                        interface allowed the Roomba to change modes, parse button
+                                        inputs, parse bumpers, parse wheel drops, parse cliff sensors,
+                                        parse light bumpers, drive straight, turn, and rotate. We used
+                                        this interface to:
+                                        <ul>
+                                            <li>
+                                                Implement a random-walk method which could detect
+                                                bumping into the wall and stop before rolling off of a
+                                                cliff.
+                                            </li>
+                                            <li>
+                                                Additionally, we added a closed-loop PD controller
+                                                which allowed the Roomba to accurately and smoothly
+                                                follow a wall.
+                                            </li>
+                                            <li>
+                                                Finally, we added a function to the previous bullet-
+                                                point which allowed the Roomba to detect a charging
+                                                station and park itself.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="column" id="video-column">
+                                        <video class="rounded" width="100%" autoplay loop muted>
+                                            <source src="roomba.MOV" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="padded">
+                                <h3>Runtime Opitimization of MergeSort</h3>
+                                <hr>
+                                Course: Statistics for Engineers<br>
+                                Language: C++<br>
+                                <a href="https://github.com/AaronTheNerd/Personal-Coding-Projects/blob/master/C%2B%2B%20Projects/MergeSort/stat.hpp">SRC</a><br>
+                                Description: Created a program which implemented MergeSort on a list
+                                and used threads to reduce the runtime. In order to make this an
+                                experiment for a statistics course, I varied the amount of threads and
+                                averaged the times in microseconds after a few thousand tests.
+                            </section>
+                            <section class="padded">
+                                <h3>Max Heap Implementation</h3>
+                                <hr>
+                                Course: Advanced Programming Techniques<br>
+                                Language: C++<br>
+                                Description: Implemented a max heap utilizing a standard array. This
+                                implementation was able to add new elements into the heap while keeping
+                                the heap valid, was able to sort arrays utilizing a heap sort, and was
+                                able to convert arrays into valid max heaps.
+                            </section>
+                        </div>
+                    </section>
+                    <section class="padded">
+                        <h2 onclick="ToggleContent('optional');">Optional Projects</h2>
+                        <hr>
+                        <div class="hidden" id="optional">
+                            <section class="padded">
+                                <h3>Simple TCP Connection</h3>
+                                <hr>
+                                Course: Introduction to Computer Networks<br>
+                                Language: Java<br>
+                                <a href="https://github.com/AaronTheNerd/csce416ec/blob/master/StudentClientStrategy.java">Client SRC</a>, <a href="https://github.com/AaronTheNerd/csce416ec/blob/master/StudentServerStrategy.java">Server SRC</a><br>
+                                Description: Created an implementation of a TCP connection by creating
+                                wrapper functions from an existing UDP connection. The TCP connection
+                                implemented congestion avoidance and reliable data transfer.
+                            </section>
+                            <section class="padded">
+                                <h3>All Possible Words from Grid</h3>
+                                <hr>
+                                Course: Algorithmic Design II<br>
+                                Language: Java<br>
+                                Description: Takes a 4x4 grid of characters and returns every word
+                                which can be made by connecting adjacent letters. The program iterated
+                                through each letter as a starting point then recursively checked the
+                                neighboring characters to generate strings which could be checked
+                                against a dictionary to check for valid words.
+                            </section>
+                        </div>
+                    </section>
+                    <section class="padded">
+                        <h2 onclick="ToggleContent('personal');">Personal Projects</h2>
+                        <hr>
+                        <div class="hidden" id="personal">
+                            <section class="padded">
+                                <h3>BigInteger</h3>
+                                <hr>
+                                Language: C++<br>
+                                <a href="https://github.com/AaronTheNerd/Projects/tree/master/BigInteger">SRC</a><br>
+                                Description: Implementation of an integer class with with 1024 bits or
+                                308 decimal digits of precision. This method allowed for the decimal
+                                printing of these numbers and utilized bitwise arithmetic for all of
+                                the integer manipulation.
+                            </section>
+                            <section class="padded">
+                                <h3>IMDb Webscraper</h3>
+                                <hr>
+                                Language: Python<br>
+                                <a href="https://github.com/AaronTheNerd/Personal-Coding-Projects/blob/master/Python%20Projects/IMDb%20Webscraper/scraper.py">SRC</a><br>
+                                Description: Created a webscraper using selenium, BeautifulSoup, and
+                                pandas to pull the top 250 movies off of IMBd. Once all of the movies
+                                had been saved to lists, the lists gets exported to an excel
+                                spreadsheet. Additionally, I designed a secondary program which would
+                                index into the spreadsheet and print the information of the movie.
+                                <img src="spreadsheet.png" alt="SpreadSheet" class="rounded" width="100%">
+                                <img src="python-output.png" alt="Output" class="rounded" width="100%">
+                            </section>
+                            <section class="padded">
+                                <h3>Trees</h3>
+                                <hr>
+                                Language: C++<br>
+                                <a href="https://github.com/AaronTheNerd/Projects/tree/master/Trees">SRC</a><br>
+                                Description: Implemented BST both as doubly-linked and singly-linked.
+                                Additionally, created a tree to implement Huffman encoding.
+                            </section>
+                            <section class="padded">
+                                <h3>The Game of Life</h3>
+                                <hr>
+                                Language: Java<br>
+                                <a href="https://github.com/AaronTheNerd/Personal-Coding-Projects/tree/master/Java/The%20Game%20of%20Life">SRC</a><br>
+                                Description: Created a Conway's Game of Life simulation with a GUI.
+                                This was code that I made after my first year of college as such it
+                                does not reflect my current abilities programming. The code has two
+                                files: Cell.java and GOLGUI.java where Cell.java defines a Cell and
+                                GOLGUI.java defines the GUI, the board of Cells, and the functions
+                                updating the cells. If I were to do this again today there would be
+                                three files: Cell.java, Board.java, GoLGUI.java. The code is ugly,
+                                uncommented, and it has been too long since I made it to go back and
+                                fix it. Despite this, I am still proud of this code, it was my first
+                                time making a GUI by hand and I added a good amount of extra functions.
+                                For example, the generation count, population number, the auto-run
+                                feature, etc.
+                                <video class="rounded" width="100%" autoplay loop muted>
+                                    <source src="GoL.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </section>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>
